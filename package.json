@@ -1,0 +1,19 @@
+{
+  "name": "fqy-cli",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yuanchaoy",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.4.1",
+    "inquirer": "^8.2.5"
+  },
+  "bin": {
+    "cli": "bin/index.js"
+  }
+}
