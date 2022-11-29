@@ -1,14 +1,12 @@
-#!/usr/bin/env node
+import { Command } from 'commander'
+import pkg from '../package.json'
+import commands from "./command/index"
+ 
+const program = new Command(pkg.name)
 
-const { Command } = require('commander');
-const { name, version } = require('../package.json');
-const commands = require('../command/index.js');
-const program = new Command();
-
-program.name(name).version(version);
-
+let keys=Reflect.ownKeys(commands) as string[]
 // 创建命令
-Reflect.ownKeys(commands).map((name) => {
+keys.map((name) => {
     const { params, alias, action, description } = commands[name] || {};
     program.command(`${name} ${params || ''}`) 
       .alias(alias) 

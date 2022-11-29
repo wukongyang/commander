@@ -6,29 +6,33 @@ const Fs = require("fs");
 
 
 
-function createAction(answer) {
+function createAction(answer:any) {
     if (Fs.existsSync(answer.projectName)) {
         console.log(chalk.red(`file ${answer.projectName} already exist！！！`));
         process.exit();
     }
+    console.log(Url);
+    
     // 克隆项目
-    exec(`git clone ${Url[answer.type]} ${answer.projectName}`, (error, stdout, stderr) => {
+    exec(`git clone ${Url[answer.type]} ${answer.projectName}`, (error:any, stdout:any, stderr:any) => {
         if (error) {
             console.log(error);
             process.exit();
         }
-        console.log(chalk.green("Create Project Success!"));
+        console.log(chalk.green("Create Project Success!!!"));
         console.log(chalk.green(`cd ${answer.projectName}`));
         console.log(chalk.green(`npm install`));
         process.exit();
     });
 }
 
-const create = {
+const create:{
+    params:any, alias:any, action:any, description:any
+} = {
     alias: "c",
     params: "[project-name]",
     description: "create a new project",
-    action: function (project) {
+    action:  (project:any)=> {
         let _create = createAction
         project
             ? _create(project)
@@ -38,7 +42,7 @@ const create = {
                         type: "input",
                         message: "项目名称:",
                         name: "projectName",
-                        validate: (val) => {
+                        validate: (val:string) => {
                             // 对输入的值做判断
                             if (!val || !val.trim()) {
                                 return chalk.red("项目名不能为空，请重新输入");
@@ -51,6 +55,31 @@ const create = {
                     {
                         type: "list",
                         message: "请选择你需要创建的模版",
+                        name: "lang",
+                        choices: [
+                            'React',
+                            'Vue'
+                        ]
+                    },
+                    {
+                        type: "list",
+                        when:(answer:any)=>{
+                            return answer.lang==='Vue'
+                        },
+                        message: "请选择你需要创建的项目类型",
+                        name: "type",
+                        choices: [
+                            'Vue-ssr',
+                            'Vue-h5',
+                        ]
+                    },
+
+                    {
+                        type: "list",
+                        when:(answer:any)=>{
+                            return answer.lang==='React'
+                        },
+                        message: "请选择你需要创建的项目类型",
                         name: "type",
                         choices: [
                             'pc',
@@ -59,11 +88,10 @@ const create = {
                         ]
                     },
                 ])
-                .then(function (answer) {
-                    console.log(answer);
+                .then( (answer:any)=> {
                     _create(answer);
                 });
     },
 };
 
-module.exports = create;
+export default create

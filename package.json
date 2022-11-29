@@ -1,19 +1,31 @@
 {
   "name": "fqy-cli",
   "version": "1.0.0",
-  "description": "test",
+  "description": "react 和 vue 脚手架模版",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack"
   },
   "author": "yuanchaoy",
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^9.4.1",
+    "fqy-cli": "^1.0.0",
     "inquirer": "^8.2.5"
   },
   "bin": {
-    "cli": "bin/index.js"
+    "@cli": "dist/index.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "@types/inquirer": "^9.0.3",
+    "babel-loader": "^9.1.0",
+    "core-js": "^3.26.1",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.9.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0"
   }
 }
