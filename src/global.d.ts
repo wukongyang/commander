@@ -1,0 +1,1 @@
+declare type commanderType=Record<'params'|'description'|'action',any|(<T>(p:T)=>void)>

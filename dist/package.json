@@ -1,0 +1,18 @@
+{
+  "name": "fqy-cli",
+  "version": "1.0.1",
+  "description": "react 和 vue 脚手架模版",
+  "main": "index.js",
+  "scripts": {},
+  "author": "yuanchaoy",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.4.1",
+    "inquirer": "^8.2.5"
+  },
+  "bin": {
+    "@cli": "lib/index.js"
+  },
+  "devDependencies": {}
+}

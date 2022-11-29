@@ -16,7 +16,7 @@
     "inquirer": "^8.2.5"
   },
   "bin": {
-    "@cli": "test/lib/index.js"
+    "@cli": "lib/index.js"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",

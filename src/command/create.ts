@@ -1,20 +1,26 @@
 const chalk = require("chalk");
 const inquirer = require("inquirer");
 const { exec } = require("child_process");
-const Url = require("../config/url")
+import {getUrl} from "../config/url"
 const Fs = require("fs");
 
 
+type createActionType={
+    projectName:string,
+    type:string,
+    lang:string
+}
 
-function createAction(answer:any) {
+
+
+function createAction<T extends createActionType>(answer:T) {
     if (Fs.existsSync(answer.projectName)) {
         console.log(chalk.red(`file ${answer.projectName} already exist！！！`));
         process.exit();
     }
-    console.log(Url);
     
     // 克隆项目
-    exec(`git clone ${Url[answer.type]} ${answer.projectName}`, (error:any, stdout:any, stderr:any) => {
+    exec(`git clone ${getUrl(answer.type)} ${answer.projectName}`, (error:any, stdout:any, stderr:any) => {
         if (error) {
             console.log(error);
             process.exit();
@@ -26,13 +32,10 @@ function createAction(answer:any) {
     });
 }
 
-const create:{
-    params:any, alias:any, action:any, description:any
-} = {
-    alias: "c",
+const create:commanderType = {
     params: "[project-name]",
     description: "create a new project",
-    action:  (project:any)=> {
+    action:  <T extends createActionType>(project:T)=> {
         let _create = createAction
         project
             ? _create(project)
@@ -88,7 +91,7 @@ const create:{
                         ]
                     },
                 ])
-                .then( (answer:any)=> {
+                .then( (answer:T)=> {
                     _create(answer);
                 });
     },
