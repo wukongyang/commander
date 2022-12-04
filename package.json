@@ -1,7 +1,7 @@
 {
-  "name": "fqy-cli",
+  "name": "create-all-app",
   "version": "1.0.1",
-  "description": "react 和 vue 脚手架模版",
+  "description": "前端 react、vue、weapp 脚手架，一个脚手架安装常见前端框架",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=dev node rollup.watch.js && npm run set",
@@ -13,7 +13,8 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^9.4.1",
-    "inquirer": "^8.2.5"
+    "inquirer": "^8.2.5",
+    "single-line-log": "^1.1.2"
   },
   "bin": {
     "@cli": "test/lib/index.js"

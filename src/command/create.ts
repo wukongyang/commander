@@ -1,41 +1,59 @@
 const chalk = require("chalk");
 const inquirer = require("inquirer");
 const { exec } = require("child_process");
-import {getUrl} from "../config/url"
+import { getUrl } from "../config/url"
 const Fs = require("fs");
-
-
-type createActionType={
-    projectName:string,
-    type:string,
-    lang:string
-}
+import handleFile, { deleteall } from "../utils/index"
+import progressBar from "../utils/progress-bar"
 
 
 
-function createAction<T extends createActionType>(answer:T) {
+function createAction<T extends createActionType>(answer: T) {
     if (Fs.existsSync(answer.projectName)) {
         console.log(chalk.red(`file ${answer.projectName} already exist！！！`));
         process.exit();
     }
-    
-    // 克隆项目
-    exec(`git clone ${getUrl(answer.type)} ${answer.projectName}`, (error:any, stdout:any, stderr:any) => {
+    // 整理所选的类型和其他配置项
+    let typeArr: string[] = answer.type.split('+')
+    answer.type = typeArr.shift() as string
+    let configOptions = typeArr
+    let timer: NodeJS.Timer, i = 0;
+    let progressBarC = new progressBar()
+    timer = setInterval(() => {
+        progressBarC.run(i++)
+        if (i == 50) {
+            clearInterval(timer)
+        }
+    }, 100)
+
+
+    exec(`git clone ${getUrl(answer.lang, answer.type, configOptions)} ${answer.projectName}`, (error: any, stdout: any, stderr: any) => {
         if (error) {
             console.log(error);
             process.exit();
         }
-        console.log(chalk.green("Create Project Success!!!"));
-        console.log(chalk.green(`cd ${answer.projectName}`));
-        console.log(chalk.green(`npm install`));
-        process.exit();
+        progressBarC.run(75)
+        handleFile(answer, configOptions).then(() => {
+            progressBarC.run(100)
+            console.log(chalk.green("Create Project Success!!!"));
+            console.log(chalk.green(`cd ${answer.projectName}`));
+            console.log(chalk.green(`npm install`));
+            process.exit();
+        }).catch(() => {
+            clearInterval(timer)
+            console.log(chalk.red(`create ${answer.projectName} fail!!!`));
+            // 删除目录
+            deleteall(process.cwd() + `/${answer.projectName}`);
+        })
+
+
     });
 }
 
-const create:commanderType = {
+const create: commanderType = {
     params: "[project-name]",
     description: "create a new project",
-    action:  <T extends createActionType>(project:T)=> {
+    action: <T extends createActionType>(project: T) => {
         let _create = createAction
         project
             ? _create(project)
@@ -45,7 +63,7 @@ const create:commanderType = {
                         type: "input",
                         message: "项目名称:",
                         name: "projectName",
-                        validate: (val:string) => {
+                        validate: (val: string) => {
                             // 对输入的值做判断
                             if (!val || !val.trim()) {
                                 return chalk.red("项目名不能为空，请重新输入");
@@ -60,14 +78,31 @@ const create:commanderType = {
                         message: "请选择你需要创建的模版",
                         name: "lang",
                         choices: [
-                            'React',
-                            'Vue'
+                            'react',
+                            'vue',
+                            'weapp'
                         ]
                     },
                     {
                         type: "list",
-                        when:(answer:any)=>{
-                            return answer.lang==='Vue'
+                        message: "请选择你需要创建的模版",
+                        name: "type",
+                        when: (answer: any) => {
+                            return answer.lang === 'weapp'
+                        },
+                        choices: [
+                            'ts',
+                            'ts+less',
+                            'ts+scss',
+                            'js',
+                            'js+less',
+                            'js+scss'
+                        ]
+                    },
+                    {
+                        type: "list",
+                        when: (answer: any) => {
+                            return answer.lang === 'Vue'
                         },
                         message: "请选择你需要创建的项目类型",
                         name: "type",
@@ -79,8 +114,8 @@ const create:commanderType = {
 
                     {
                         type: "list",
-                        when:(answer:any)=>{
-                            return answer.lang==='React'
+                        when: (answer: any) => {
+                            return answer.lang === 'React'
                         },
                         message: "请选择你需要创建的项目类型",
                         name: "type",
@@ -91,10 +126,11 @@ const create:commanderType = {
                         ]
                     },
                 ])
-                .then( (answer:T)=> {
+                .then((answer: T) => {
                     _create(answer);
                 });
     },
 };
+
 
 export default create
