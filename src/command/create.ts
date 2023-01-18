@@ -5,10 +5,13 @@ import { getUrl } from "../config/url"
 const Fs = require("fs");
 import handleFile, { deleteall } from "../utils/index"
 import progressBar from "../utils/progress-bar"
+import createBox from "../utils/box";
 
 
 
 function createAction<T extends createActionType>(answer: T) {
+    // console.log('----',answer);
+    // return 
     if (Fs.existsSync(answer.projectName)) {
         console.log(chalk.red(`file ${answer.projectName} already exist！！！`));
         process.exit();
@@ -20,24 +23,31 @@ function createAction<T extends createActionType>(answer: T) {
     let timer: NodeJS.Timer, i = 0;
     let progressBarC = new progressBar()
     timer = setInterval(() => {
+
         progressBarC.run(i++)
         if (i == 50) {
             clearInterval(timer)
         }
     }, 100)
 
-
-    exec(`git clone ${getUrl(answer.lang, answer.type, configOptions)} ${answer.projectName}`, (error: any, stdout: any, stderr: any) => {
+console.log(chalk.green(createBox(answer).stringify()));
+    return
+    exec(`git clone ${getUrl(answer.lang, answer.type)} ${answer.projectName}`, (error: any, stdout: any, stderr: any) => {
         if (error) {
             console.log(error);
             process.exit();
         }
         progressBarC.run(75)
+        // 清除git记录
+        exec('rm -fr .git')
         handleFile(answer, configOptions).then(() => {
             progressBarC.run(100)
-            console.log(chalk.green("Create Project Success!!!"));
-            console.log(chalk.green(`cd ${answer.projectName}`));
-            console.log(chalk.green(`npm install`));
+
+            // console.log(chalk.green("Create Project Success!!!"));
+            // console.log(chalk.green(`cd ${answer.projectName}`));
+            // if(answer.lang!=='weapp'){
+            //     console.log(chalk.green(`npm install`));
+            // }
             process.exit();
         }).catch(() => {
             clearInterval(timer)
@@ -115,7 +125,7 @@ const create: commanderType = {
                     {
                         type: "list",
                         when: (answer: any) => {
-                            return answer.lang === 'React'
+                            return answer.lang === 'react'
                         },
                         message: "请选择你需要创建的项目类型",
                         name: "type",

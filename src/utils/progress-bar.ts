@@ -16,7 +16,7 @@ class progress {
                 0: '努力构建中🔧……',
                 50:'加载一半啦，不要着急🐶……',
                 75:'马上就加载完了😊……',
-                100:'创建完成😄'
+                100:'创建完成🎆🎉,开始搬砖吧🧱😊'
             },
             color:'blue'
         };
@@ -25,7 +25,7 @@ class progress {
     }
     run(current:number){
         const {block, duration, tip, color, showNumber} = this.config;
-        let tipList = Object.keys(tip).sort((a,b)=>  parseInt(b) - parseInt(a));
+        const tipList = Object.keys(tip).sort((a,b)=>  parseInt(b) - parseInt(a));
         let showTip = tip[0];
         const step = duration / 100;
         const len = Math.floor(current / step);

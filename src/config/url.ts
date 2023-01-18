@@ -1,5 +1,6 @@
 const BaseGitUrl='https://gitee.com/wukongyang/'
 let urlList:Record<Lang,Record<string,string>> = {
+    
     react:{
         mini: 'mini-template',
         pc: 'pc-template',
@@ -15,6 +16,6 @@ let urlList:Record<Lang,Record<string,string>> = {
    
 }
 
-export function getUrl<T>(lang:Lang,type:string,configOptions:T) {
+export function getUrl(lang:Lang,type:string) {
     return `${BaseGitUrl}${urlList[lang][type]}.git`
 }
