@@ -1,40 +1,16 @@
 module.exports = {
-  // 超过最大值换行
-  printWidth: 120,
-  // 缩进字节数
-  tabWidth: 2,
-  // 缩进不使用tab, 使用空格
-  useTabs: false,
-  // 句尾添加分号
-  semi: true,
-  // 使用单引号代替双引号
-  singleQuote: true,
-  // 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行
-  proseWrap: "preserve",
-  //  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid: 省略括号
-  arrowParens: "avoid",
-  // 在对象，数组括号与文字之间加空格 "{ foo: bar }"
-  bracketSpacing: true,
-  // 结尾是 \n \r \n\r auto
-  endOfLine: "auto",
-  //不让prettier使用eslint的代码格式进行校验
-  eslintIntegration: false,
-  htmlWhitespaceSensitivity: "ignore",
-  // 不使用prettier格式化的文件填写在项目的.prettierignore文件中
-  ignorePath: ".prettierignore",
-  // 在jsx中把'>' 是否单独放一行
-  jsxBracketSameLine: false,
-  // 在jsx中使用单引号代替双引号
-  jsxSingleQuote: false,
-  // 格式化的解析器，默认是babel
-  parser: "babel",
-  // Require a 'prettierconfig' to format prettier
-  requireConfig: false,
-  //不让prettier使用stylelint的代码格式进行校验
-  stylelintIntegration: false,
-  // 在对象或数组最后一个元素后面是否加逗号（在ES5中加尾逗号）
-  trailingComma: "es5",
-  // 不让prettier使用tslint的代码格式进行校验
-  tslintIntegration: false
-
+  endOfLine: 'auto',
+  printWidth: 80,                    //（默认值）单行代码超出 80 个字符自动换行
+  tabWidth: 2,                       //（默认值）一个 tab 键缩进相当于 2 个空格
+  useTabs: true,                     // 行缩进不使用 tab 键代替空格
+  semi: false,                       //（默认值）禁止语句的末尾加上分号
+  singleQuote: true,                 // 使用单引号
+  quoteProps: 'as-needed',           //（默认值）仅仅当必须的时候才会加上双引号
+  jsxSingleQuote: true,              // 在 JSX 中使用单引号
+  trailingComma: 'none',              // 不用在多行的逗号分隔的句法结构的最后一行的末尾加上逗号
+  bracketSpacing: true,              //（默认值）在括号和对象的文字之间加上一个空格
+  jsxBracketSameLine: true,          // 把 > 符号放在多行的 JSX 元素的最后一行
+  arrowParens: 'avoid',              // 当箭头函数中只有一个参数的时候可以忽略括弧
+  vueIndentScriptAndStyle: false,    //（默认值）对于 .vue 文件，不缩进 <script> 和 <style> 里的内容
+  embeddedLanguageFormatting: 'off' // 不允许格式化内嵌的代码块，比如 markdown  文件里的代码块
 };
