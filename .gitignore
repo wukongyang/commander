@@ -38,3 +38,5 @@ functions/*
 screenshot
 .firebase
 .eslintcache
+/dist
+/test
