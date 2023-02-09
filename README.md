@@ -2,7 +2,7 @@
 
 ***
 ## **使用方法**
-**npm install create-all-app -g**
+**npm install any-app -g**
 
  **@cli create**
 
@@ -13,8 +13,5 @@
 
 **目前脚手架正处于前期开发阶段，当前仅支持部分功能**
 
-## 欢迎 ➕V 
-
-[![Wechat-IMG91.jpg](https://i.postimg.cc/wTbB7wcB/Wechat-IMG91.jpg)](https://postimg.cc/VdnwhBhy)
 
 
