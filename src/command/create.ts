@@ -8,9 +8,6 @@ const { exec } = require('child_process')
 const Fs = require('fs')
 
 function createAction<T extends createActionType>(answer: T) {
-	// console.log('----',answer);
-	// return
-
 	if (Fs.existsSync(answer.projectName)) {
 		console.log(chalk.red(`file ${answer.projectName} already exist！！！`))
 		process.exit()
@@ -28,12 +25,10 @@ function createAction<T extends createActionType>(answer: T) {
 			clearInterval(timer)
 		}
 	}, 100)
-	console.log(chalk.green(createBox(answer).stringify()))
 
-	return
 	exec(
 		`git clone ${getUrl(answer.lang, answer.type)} ${answer.projectName}`,
-		(error: any, stdout: any, stderr: any) => {
+		(error: any) => {
 			if (error) {
 				console.log(error)
 				process.exit()
@@ -44,6 +39,7 @@ function createAction<T extends createActionType>(answer: T) {
 			handleFile(answer, configOptions)
 				.then(() => {
 					progressBarC.run(100)
+					console.log(chalk.green(createBox(answer).stringify()))
 
 					// console.log(chalk.green("Create Project Success!!!"));
 					// console.log(chalk.green(`cd ${answer.projectName}`));

@@ -19,16 +19,25 @@ function handleWxFile<T extends createActionType>(
 				}
 				fs.rename(
 					process.cwd() + `${basePath}/app.wxss`,
-					process.cwd() + `${basePath}/app.${configOptions[0]}`
+					process.cwd() + `${basePath}/app.${configOptions[0]}`,
+					(error: string) => {
+						console.log(error)
+					}
 				)
 				fs.rename(
 					process.cwd() + `${basePath}/components/ViscidGlobe/ViscidGlobe.wxss`,
 					process.cwd() +
-						`${basePath}/components/ViscidGlobe/ViscidGlobe.${configOptions[0]}`
+						`${basePath}/components/ViscidGlobe/ViscidGlobe.${configOptions[0]}`,
+					(error: string) => {
+						console.log(error)
+					}
 				)
 				fs.rename(
 					process.cwd() + `${basePath}/pages/index/index.wxss`,
-					process.cwd() + `${basePath}/pages/index/index.${configOptions[0]}`
+					process.cwd() + `${basePath}/pages/index/index.${configOptions[0]}`,
+					(error: string) => {
+						console.log(error)
+					}
 				)
 			}
 			// 写入配置

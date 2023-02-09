@@ -1,11 +1,12 @@
 {
-	"name": "create-all-app",
-	"version": "1.0.1",
+	"name": "any-app",
+	"version": "1.0.3",
 	"description": "前端 react、vue、weapp 脚手架，一个脚手架安装常见前端框架",
 	"main": "index.js",
 	"scripts": {
 		"dev": "NODE_ENV=dev node rollup.watch.js && npm run set",
 		"build": "NODE_ENV=prod rollup -c && npm run set",
+		"prepublishOnly": "npm run build",
 		"set": "node set-file.js",
 		"lint": "eslint src --fix --ext .ts,.tsx "
 	},
