@@ -1,14 +1,11 @@
 {
-    "compilerOptions": {
-        "module": "ES2015",
-        "target": "ES2015",
-        "strict": true,
-        "removeComments":true
-    },
-    "include": ["src/**/**.ts", "src/**/**.d.ts", "src/**/**.tsx"],
-    "files":[
-        "src/index.ts"
-    ]
-
-    
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "@@/*": [".dumi/tmp/*"]
+    }
+  }
 }
