@@ -1,7 +1,5 @@
 # commander
 
-A static site base on [dumi](https://d.umijs.org).
-
 ## Development
 
 ```bash
@@ -9,10 +7,14 @@ A static site base on [dumi](https://d.umijs.org).
 $ npm install
 
 # start dev server
-$ npm start
+$ npm run start:docs
+# run library
+$ npm run start:commander
 
 # build docs
-$ npm run build
+$ npm run build:docs
+# build library
+$ npm run build:commander
 ```
 
 ## LICENSE
