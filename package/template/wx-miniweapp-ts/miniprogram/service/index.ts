@@ -12,15 +12,15 @@ export function httpRequest<T>(options: WechatMiniprogram.RequestOption, success
     options.url = baseUrl[env] + options.url
 
     //根据业务处理
-    let token = wx.getStorageSync('token') || ''
+    // let token = wx.getStorageSync('token') || ''
     wx.request({
       // 配置 "wx.request" 请求参数
       ...options,
       // 具体根据业务处理校验逻辑
-      header: {
-        'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'token': `${token}`
-      },
+      // header: {
+      //   'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      //   'token': `${token}`
+      // },
       success: (res: WechatMiniprogram.RequestSuccessCallbackResult) => {
         console.log("network-res=>", res);
         if (res?.statusCode === 200) {

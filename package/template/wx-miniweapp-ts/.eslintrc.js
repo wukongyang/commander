@@ -28,4 +28,5 @@ module.exports = {
   },
   // extends: 'eslint:recommended',
   rules: {},
+  parser: '@typescript-eslint/parser',
 }
