@@ -1,0 +1,14 @@
+{
+    "restartable": "rs",
+    "verbose": true,
+    "watch": [
+      "src/"
+    ],
+    "ignore": [
+      "node_modules"
+    ],
+    "delay": "1000",
+    "script":"src/index.ts",
+    "exec": "ts-node ./src/index.ts",
+    "ext": "ts ejs yml json"
+  }

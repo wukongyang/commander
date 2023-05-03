@@ -6,4 +6,5 @@ package/**/node_modules
 package/**/dist
 package/**/test
 package/**/package-lock.json
+package/**/.bin
 

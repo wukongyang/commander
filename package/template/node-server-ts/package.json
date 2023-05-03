@@ -6,14 +6,16 @@
   "author": "",
   "main": "src/index.js",
   "scripts": {
-    "dev": "gulp dev",
-    "end": "pm2 delete all",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"nodemon --config nodemon.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"tsc"
   },
   "devDependencies": {
     "@types/node": "^18.16.1",
-    "gulp": "^4.0.2",
-    "pm2": "^5.3.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
   }
 }
