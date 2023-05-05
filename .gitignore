@@ -7,4 +7,5 @@ package/**/dist
 package/**/test
 package/**/package-lock.json
 package/**/.bin
+package/**/.vscode
 
