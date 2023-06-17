@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+    paths:   # 这里是用来指定哪个文件更改，才会触发的
+      - 'package/template/node-server/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+          
+      - name: Submit code to repository
+        run: |
+         git add .
+         git commit -m `${{ github.event.head_commit.message }}`
+         git push origin master
