@@ -15,6 +15,7 @@ jobs:
           
       - name: Submit code to repository
         run: |
+         cd package/template/node-server
          git config user.email "yangyc95@163.com"
          git config user.name "yangyuancho"
          git add .
