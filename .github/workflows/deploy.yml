@@ -1,0 +1,33 @@
+name: Deploy
+on:
+  push:
+    branches: [ "master" ]
+#   pull_request:
+#     branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+           node-version: 16
+    - name: Install dependencies
+      run: |
+          if [ -e yarn.lock ]; then
+          yarn install --frozen-lockfile
+          elif [ -e package-lock.json ]; then
+          npm ci
+          else
+          npm i
+          fi
+    - run: npm run docs:build
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+          deploy_key: ${{ secrets.yangyuanchao }}
+          publish_dir: docs-dist
+          publish_branch: pages
+          commit_message: ${{ github.event.head_commit.message }}
