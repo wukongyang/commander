@@ -23,7 +23,7 @@ jobs:
           else
           npm i
           fi
-    - run: npm run docs:build
+    - run: npm run build:docs
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
