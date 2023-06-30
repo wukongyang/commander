@@ -5,5 +5,9 @@ export default defineConfig({
   themeConfig: {
     name: 'any-app',
   },
+   // hash: true,
+  history: {
+    type: 'hash',
+  },
   publicPath: isDev ? '/' : 'https://wukongyang.github.io/commander/',
 });
